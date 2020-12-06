@@ -1,27 +1,22 @@
 # app/auth/views.py
-
 from flask import flash, redirect, render_template, url_for
 from flask_login import login_required, login_user, logout_user
 
 from . import auth
-from forms import LoginForm, RegistrationForm
+from .forms import *
 from .. import db
-from ..models import Employee
+from ..models import Seller
 
-
-def define_user_or_seller(form):
-    if form.seller.data:
-       return Seller(email=form.email.data,
-                            username=form.username.data,
-                            first_name=form.first_name.data,
-                            last_name=form.last_name.data,
-                            password=form.password.data)
+def define_seller(form):
     
-    return User(email=form.email.data,
-                            username=form.username.data,
-                            first_name=form.first_name.data,
-                            last_name=form.last_name.data,
-                            password=form.password.data)
+    return Seller(email=form.email.data,
+                        username=form.username.data,
+                        first_name=form.first_name.data,
+                        last_name=form.last_name.data,
+                        password=form.password.data)
+
+def verify_seller(form):
+    return Seller.query.filter_by(email=form.email.data).first()
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
@@ -31,7 +26,7 @@ def register():
     """
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = define_user_or_seller(form)
+        user = define_seller(form)
 
         # add user to the database
         db.session.add(user)
@@ -54,12 +49,12 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
 
-        # check whether employee exists in the database and whether
+        # check whether user exists in the database and whether
         # the password entered matches the password in the database
-        user = User.query.filter_by(email=form.email.data).first()
+        user = verify_seller(form)
         if user is not None and user.verify_password(
                 form.password.data):
-            # log employee in
+            # log user in
             login_user(user)
 
             # redirect to the dashboard page after login
@@ -78,7 +73,7 @@ def login():
 def logout():
     """
     Handle requests to the /logout route
-    Log an employee out through the logout link
+    Log an user out through the logout link
     """
     logout_user()
     flash('You have successfully been logged out.')

@@ -4,14 +4,13 @@ from flask_wtf import FlaskForm
 from wtforms import PasswordField, StringField, SubmitField, ValidationError, BooleanField
 from wtforms.validators import DataRequired, Email, EqualTo
 
-from ..models import Employee
+from ..models import Seller
 
 
 class RegistrationForm(FlaskForm):
     """
     Form for users to create new account
     """
-    is_seller = BooleanField('Vedendor', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     username = StringField('Username', validators=[DataRequired()])
     first_name = StringField('First Name', validators=[DataRequired()])
@@ -24,13 +23,12 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Register')
 
     def validate_email(self, field):
-        if Employee.query.filter_by(email=field.data).first():
+        if Seller.query.filter_by(email=field.data).first():
             raise ValidationError('Email is already in use.')
-
+        
     def validate_username(self, field):
-        if Employee.query.filter_by(username=field.data).first():
+        if Seller.query.filter_by(username=field.data).first():
             raise ValidationError('Username is already in use.')
-
 
 class LoginForm(FlaskForm):
     """

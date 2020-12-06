@@ -11,16 +11,16 @@ body, h1, h2, h3 {
 }
 
 a, .navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
-  color: #aec251;
+  color: #db710e
 }
 
 a:hover, .navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a:hover {
-  color: #687430;
+  color: #db710e
 }
 
 footer {
     padding: 50px 0;
-    background-color: #f8f8f8;
+    background-color: #e4ac77;
 }
 
 p.copyright {
@@ -31,7 +31,7 @@ p.copyright {
     width: 50%;
     margin: auto;
     color: #687430;
-    background-color: #e6ecca;
+    background-color: hsl(34, 78%, 66%);
     border-color: #aec251;
 }
 
@@ -52,7 +52,7 @@ p.copyright {
 
 .content-section {
     padding: 50px 0;
-    border-top: 1px solid #e7e7e7;
+    border-top: 1px solid #e48752;
 }
 
 .footer, .push {
@@ -62,7 +62,7 @@ p.copyright {
 
 .intro-divider {
     width: 400px;
-    border-top: 1px solid #f8f8f8;
+    border-top: 1px solid #eb790e;
     border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
@@ -70,7 +70,7 @@ p.copyright {
     padding-top: 50px;
     padding-bottom: 50px;
     text-align: center;
-    color: #f8f8f8;
+    color: #eb790e;
     background: url(../img/intro-bg.jpg) no-repeat center center;
     background-size: cover;
     height: 100%;
